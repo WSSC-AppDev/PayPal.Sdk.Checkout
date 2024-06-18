@@ -2,6 +2,7 @@ using PayPal.Sdk.Checkout.Authentication;
 using PayPal.Sdk.Checkout.Configuration;
 using PayPal.Sdk.Checkout.Core.HttpRequests;
 using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -42,4 +43,7 @@ public interface IPayPalHttpClient : IDisposable
         CancellationToken cancellationToken = default
     )
         where TRequest : BaseHttpRequest;
+
+    void SetProxy(WebProxy proxy);
+    void SetProxy(string server, string username, string password);
 }

@@ -43,7 +43,11 @@ public abstract class OrdersPatchRequest<T, TPathType> : PayPalHttpRequest
         string orderId,
         JsonTypeInfo<IReadOnlyCollection<TPathType>> jsonTypeInfoForRequestBody
     ) : base(
+#if NET461
+        "/v2/checkout/orders/{order_id}", HttpMethod.Post,
+#else
         "/v2/checkout/orders/{order_id}", HttpMethod.Patch,
+#endif
         jsonTypeInfoForRequestBody
     )
     {

@@ -44,8 +44,12 @@ public class TextSerializer : IMessageSerializer
     )
         where TResponse : notnull
     {
+#if NET461
+        return (TResponse) (object) await response.ReadAsStringAsync();
+#else
         return (TResponse) (object) await response.ReadAsStringAsync(
             cancellationToken
         );
+#endif
     }
 }

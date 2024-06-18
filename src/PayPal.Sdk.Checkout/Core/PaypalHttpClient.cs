@@ -5,8 +5,10 @@ using PayPal.Sdk.Checkout.Core.HttpRequests;
 using PayPal.Sdk.Checkout.Core.Interfaces;
 using PayPal.Sdk.Checkout.RequestInterfaces;
 using System;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Policy;
 using System.Text.Json.Serialization.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,7 +18,7 @@ namespace PayPal.Sdk.Checkout.Core;
 // ReSharper disable once ClassWithVirtualMembersNeverInherited.Global
 public class PayPalHttpClient : IPayPalHttpClient
 {
-    private readonly HttpClient _httpClient;
+    private HttpClient _httpClient;
 
     private readonly IPayPayEncoder _payPayEncoder;
 
@@ -54,9 +56,9 @@ public class PayPalHttpClient : IPayPalHttpClient
             new Uri(request.Path, UriKind.Relative)
         );
 
-        foreach (var (header, headerValue) in request.Headers)
+        foreach (var pair in request.Headers)
         {
-            httpRequest.Headers.Add(header, headerValue);
+            httpRequest.Headers.Add(pair.Key, pair.Value);
         }
 
         if (request.Authorization != null)
@@ -107,9 +109,13 @@ public class PayPalHttpClient : IPayPalHttpClient
             return new PayPalHttpResponse(response.Headers, response.StatusCode);
         }
 
+#if NET461
+        var responseBodyContent = await response.Content.ReadAsStringAsync();
+#else
         var responseBodyContent = await response.Content.ReadAsStringAsync(
             cancellationToken
         );
+#endif
 
         throw new PayPalHttpException(response.StatusCode, response.Headers, responseBodyContent);
     }
@@ -138,9 +144,13 @@ public class PayPalHttpClient : IPayPalHttpClient
             return new PayPalHttpResponse<TResponse>(response.Headers, response.StatusCode, responseBody);
         }
 
+#if NET461
+        var responseBodyContent = await response.Content.ReadAsStringAsync();
+#else
         var responseBodyContent = await response.Content.ReadAsStringAsync(
             cancellationToken
         );
+#endif
 
         throw new PayPalHttpException(response.StatusCode, response.Headers, responseBodyContent);
     }
@@ -251,6 +261,31 @@ public class PayPalHttpClient : IPayPalHttpClient
         var response = await _httpClient.SendAsync(httpRequest, cancellationToken);
 
         return await ProcessResponseAsync(response, cancellationToken);
+    }
+
+    public void SetProxy(WebProxy proxy)
+    {
+        var handler = new HttpClientHandler
+        {
+            Proxy = proxy,
+            UseProxy = true
+        };
+
+        _httpClient = new HttpClient(handler, true);
+    }
+
+    public void SetProxy(string server, string username, string password)
+    {
+        var proxy = new WebProxy(server)
+        {
+            BypassProxyOnLocal = true,
+            UseDefaultCredentials = true
+        };
+
+        if (!string.IsNullOrEmpty(username) || !string.IsNullOrEmpty(password))
+            proxy.Credentials = new NetworkCredential(username, password);
+
+        SetProxy(proxy);
     }
 
 

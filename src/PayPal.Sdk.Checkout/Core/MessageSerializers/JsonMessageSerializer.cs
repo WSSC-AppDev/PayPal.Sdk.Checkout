@@ -62,10 +62,13 @@ public class JsonMessageSerializer : IMessageSerializer
     {
         _ = responseJsonTypeInfo ?? throw new ArgumentNullException(nameof(responseJsonTypeInfo));
 
+#if NET461
+        var stream = await response.ReadAsStreamAsync();
+#else
         var stream = await response.ReadAsStreamAsync(
             cancellationToken
         );
-
+#endif
         var deserializedResponse = await JsonSerializer.DeserializeAsync(
             stream,
             responseJsonTypeInfo,
