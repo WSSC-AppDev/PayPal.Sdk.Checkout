@@ -1,4 +1,7 @@
 .idea
+.vs
+.vscode
+
 *.sln.DotSettings.user
 formatDiagnosticLog.binlog
 

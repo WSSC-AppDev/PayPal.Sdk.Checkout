@@ -24,5 +24,5 @@ public class OrderPaymentInstruction
     /// The funds that are held on behalf of the merchant.
     /// </summary>
     [JsonPropertyName("disbursement_mode")]
-    public EDisbursementMode? DisbursementMode { get; set; }
+    public EDisbursementMode DisbursementMode { get; set; }
 }

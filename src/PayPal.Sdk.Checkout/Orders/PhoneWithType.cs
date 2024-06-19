@@ -18,5 +18,5 @@ public class PhoneWithType
     /// The phone type.
     /// </summary>
     [JsonPropertyName("phone_type")]
-    public EPhoneType? PhoneType { get; set; }
+    public EPhoneType PhoneType { get; set; }
 }

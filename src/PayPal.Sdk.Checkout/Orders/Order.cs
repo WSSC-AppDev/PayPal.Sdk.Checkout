@@ -12,7 +12,7 @@ public class Order
     /// The intent to either capture payment immediately or authorize a payment for an order after order creation.
     /// </summary>
     [JsonPropertyName("intent")]
-    public EOrderIntent? CheckoutPaymentIntent { get; set; }
+    public EOrderIntent CheckoutPaymentIntent { get; set; }
 
     /// <summary>
     /// The date and time, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). Seconds are required while fractional seconds are optional.<blockquote><strong>Note:</strong> The regular expression provides guidance but does not reject all invalid dates.</blockquote>
@@ -54,7 +54,7 @@ public class Order
     /// The order status.
     /// </summary>
     [JsonPropertyName("status")]
-    public EOrderStatus? Status { get; set; }
+    public EOrderStatus Status { get; set; }
 
     /// <summary>
     /// The date and time, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). Seconds are required while fractional seconds are optional.<blockquote><strong>Note:</strong> The regular expression provides guidance but does not reject all invalid dates.</blockquote>

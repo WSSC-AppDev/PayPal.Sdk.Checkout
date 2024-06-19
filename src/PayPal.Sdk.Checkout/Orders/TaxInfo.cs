@@ -19,5 +19,5 @@ public class TaxInfo
     /// The customer's tax ID type. Supported for the PayPal payment method only.
     /// </summary>
     [JsonPropertyName("tax_id_type")]
-    public ETaxIdType? TaxIdType { get; set; }
+    public ETaxIdType TaxIdType { get; set; }
 }

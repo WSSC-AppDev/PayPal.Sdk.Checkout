@@ -18,7 +18,7 @@ public class OrderRequest
     /// The intent to either capture payment immediately or authorize a payment for an order after order creation.
     /// </summary>
     [JsonPropertyName("intent")]
-    public EOrderIntent? CheckoutPaymentIntent { get; set; }
+    public EOrderIntent CheckoutPaymentIntent { get; set; }
 
     /// <summary>
     /// The customer who approves and pays for the order. The customer is also known as the payer.

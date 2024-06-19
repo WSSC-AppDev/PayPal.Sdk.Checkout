@@ -271,7 +271,17 @@ public class PayPalHttpClient : IPayPalHttpClient
             UseProxy = true
         };
 
-        _httpClient = new HttpClient(handler, true);
+        var client = new HttpClient(handler, true);
+
+        client.BaseAddress = _httpClient.BaseAddress;
+        client.Timeout = _httpClient.Timeout;
+
+        foreach (var header in _httpClient.DefaultRequestHeaders)
+        {
+            client.DefaultRequestHeaders.Add(header.Key, header.Value);
+        }
+
+        _httpClient = client;
     }
 
     public void SetProxy(string server, string username, string password)

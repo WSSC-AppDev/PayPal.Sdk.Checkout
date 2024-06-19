@@ -29,7 +29,7 @@ public class ApplicationContext
     /// The type of landing page to show on the PayPal site for customer checkout.
     /// </summary>
     [JsonPropertyName("landing_page")]
-    public ELandingPage? LandingPage { get; set; }
+    public ELandingPage LandingPage { get; set; }
 
     /// <summary>
     /// The [language tag](https://tools.ietf.org/html/bcp47#section-2) for the language in which to localize the error-related strings,
@@ -51,11 +51,11 @@ public class ApplicationContext
     /// The shipping preference:<ul><li>Displays the shipping address to the customer.</li><li>Enables the customer to choose an address on the PayPal site.</li><li>Restricts the customer from changing the address during the payment-approval process.</li></ul>
     /// </summary>
     [JsonPropertyName("shipping_preference")]
-    public EShippingPreference? ShippingPreference { get; set; }
+    public EShippingPreference ShippingPreference { get; set; }
 
     /// <summary>
     /// Configures a <strong>Continue</strong> or <strong>Pay Now</strong> checkout flow.
     /// </summary>
     [JsonPropertyName("user_action")]
-    public EUserAction? UserAction { get; set; }
+    public EUserAction UserAction { get; set; }
 }

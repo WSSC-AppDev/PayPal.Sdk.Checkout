@@ -31,9 +31,6 @@ internal partial class PayPalJsonSerializerContext : JsonSerializerContext
     {
         // register generated converters to options
         UseEnumConverters(s_defaultOptions.Converters);
-
-#if NET8_0_OR_GREATER
         Default = new PayPalJsonSerializerContext(new System.Text.Json.JsonSerializerOptions(s_defaultOptions));
-#endif
     }
 }

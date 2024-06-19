@@ -19,7 +19,7 @@ public class LinkDescription
     /// The HTTP method required to make the related call.
     /// </summary>
     [JsonPropertyName("method")]
-    public EHttpMethod? Method { get; set; }
+    public EHttpMethod Method { get; set; }
 
     /// <summary>
     /// REQUIRED

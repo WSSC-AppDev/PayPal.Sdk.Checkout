@@ -6,11 +6,11 @@
     <Nullable>enable</Nullable>
     <VersionPrefix>1.0.0</VersionPrefix>
     <Owners>PayPal</Owners>
-    <RepositoryUrl>https://github.com/aviationexam/PayPal.Sdk.Checkout</RepositoryUrl>
+    <RepositoryUrl>https://github.com/WSSC-AppDev/PayPal.Sdk.Checkout</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageProjectUrl>https://github.com/aviationexam/PayPal.Sdk.Checkout</PackageProjectUrl>
-    <Title>PayPalCheckoutSdk</Title>
-    <Authors>PayPal, Aviationexams</Authors>
+    <PackageProjectUrl>https://github.com/WSSC-AppDev/PayPal.Sdk.Checkout</PackageProjectUrl>
+    <Title>PayPal Checkout SDK</Title>
+    <Authors>PayPal, Aviationexams, WSSC</Authors>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
@@ -31,6 +31,8 @@
 
     <!-- Allowed options UseBackingType, UseEnumName, or UseBackingType|UseEnumName (DeserializationStrategy is Flags enum). Default value UseEnumName -->
     <AVI_EJC_DefaultEnumDeserializationStrategy>UseBackingType|UseEnumName</AVI_EJC_DefaultEnumDeserializationStrategy>
+    <AssemblyName>WSSC.$(MSBuildProjectName)</AssemblyName>
+    <RootNamespace>WSSC.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Label="Configure GitInfo">
@@ -47,6 +49,8 @@
     <!-- optional, default value false -->
     <!-- it check only cache existence, not that HEAD equals HEAD in cache -->
     <GitInfo_UseAggressiveCache>false</GitInfo_UseAggressiveCache>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>2.5.3</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -59,7 +63,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.0" />
-    <PackageReference Include="System.Text.Json" Version="8.0.0" />
+    <PackageReference Include="System.Text.Json" Version="8.0.3" />
   </ItemGroup>
 
 </Project>

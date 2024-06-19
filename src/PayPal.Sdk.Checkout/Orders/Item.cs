@@ -11,7 +11,7 @@ public class Item
     /// The item category type.
     /// </summary>
     [JsonPropertyName("category")]
-    public EItemCategory? Category { get; set; }
+    public EItemCategory Category { get; set; }
 
     /// <summary>
     /// REQUIRED

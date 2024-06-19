@@ -20,5 +20,5 @@ public class Token
     /// </summary>
     [Required]
     [JsonPropertyName("type")]
-    public ETokenType? Type { get; set; }
+    public ETokenType Type { get; set; }
 }
